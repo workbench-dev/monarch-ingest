@@ -1,0 +1,44 @@
+id: https://w3id.org/monarch/monarch-py
+name: monarch-py
+description: Data models for the Monarch Initiative data access library
+prefixes:
+  linkml: https://w3id.org/linkml/
+  biolink: https://w3id.org/biolink/vocab/
+imports:
+  - linkml:types
+  - similarity
+default_range: string
+
+enums:
+  AssociationDirectionEnum:
+    description: >-
+      The directionality of an association as it relates to a specified entity, with edges being categorized
+      as incoming or outgoing
+    permissible_values:
+      incoming:
+        description: >-
+          An association for which a specified entity is the object or part of the object closure
+      outgoing:
+        description: >-
+          An association for which a specified entity is the subject or part of the subject closure
+
+classes:
+  Association:
+    slots:
+      - id
+      - category
+      - subject
+      - original_subject
+      - subject_namespace
+      - subject_category
+      - subject_closure
+      - subject_label
+      - subject_closure_label
+      - subject_taxon
+      - subject_taxon_label
+      - predicate
+      - original_predicate
+      - object
+      - original_object
+      - object_namespace
+      - object_category
