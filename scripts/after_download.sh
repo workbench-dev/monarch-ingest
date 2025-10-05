@@ -43,6 +43,14 @@ else
   echo "\"data/alliance/BGI_HUMAN.json.gz\" does not exist. Skipping creation of \"data/hgnc/hgnc_so_terms.tsv\""
 fi
 
+if [ -f data/hgnc/hgnc_complete_set.txt ]; then
+  # Clean HGNC CSV file to fix embedded newlines and inconsistent field counts
+  ${PYTHON} scripts/fix_hgnc_proper.py
+  echo "\"data/hgnc/hgnc_complete_set.txt\" cleaned. Created \"data/hgnc/hgnc_complete_set_clean.txt\"."
+else
+  echo "\"data/hgnc/hgnc_complete_set.txt\" does not exist. Skipping HGNC CSV cleaning."
+fi
+
 if [ -f data/dictybase/ddpheno.db ]; then
   # Make an id, name map of DDPHENO terms
   sqlite3 -cmd ".mode tabs" -cmd ".headers on" data/dictybase/ddpheno.db "select subject as id, value as name from rdfs_label_statement where predicate = 'rdfs:label' and subject like 'DDPHENO:%'" > data/dictybase/ddpheno.tsv
